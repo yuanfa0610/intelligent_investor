@@ -1,32 +1,49 @@
 import csv
 import datetime
+import os
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions
+import yaml
 
 driver = webdriver.Chrome()
 
-macrotrends_stock_screener_url = 'https://www.macrotrends.net/stocks/stock-screener'
+config_folder = 'config'
+general_config_file_path = f'{config_folder}/config.yaml'
 
-stocks_table_id = 'jqxGrid'
-descriptive_tab_id = 'columns_descriptive'
-country_column_header_xpath = "//span[text()='Country']"
-column_headers_css_selector = "div[role='columnheader']"
-row_id_prefix = 'row'
-row_id_suffix = 'jqxGrid'
-grid_cell_css_selector = 'div[role="gridcell"]'
-next_button_css_selector = 'div[title="next"]'
+# Read config files to populate the configurations
+with open(general_config_file_path, 'r') as config_file:
+    general_config = yaml.safe_load(config_file)
 
-column_headers_text = ["Stock Name", "Ticker", "Market Cap", "Exchange", "Country", "Sector", "Industry"]
+config_file_name = general_config['config_file_name']['stocks_descriptive']
+config_file_path = f'{config_folder}/{config_file_name}'
+default_page_wait_time = general_config['default_page_wait_time']
+
+with open(config_file_path, 'r') as config_file:
+    config = yaml.safe_load(config_file)
+
+macrotrends_stock_screener_url = config['network']['macrotrends_stock_screener_url']
+
+stocks_table_id = config['page_locator']['stocks_table_id']
+descriptive_tab_id = config['page_locator']['descriptive_tab_id']
+country_column_header_xpath = config['page_locator']['country_column_header_xpath']
+column_headers_css_selector = config['page_locator']['column_headers_css_selector']
+row_id_prefix = config['page_locator']['row_id_prefix']
+row_id_suffix = config['page_locator']['row_id_suffix']
+grid_cell_css_selector = config['page_locator']['grid_cell_css_selector']
+next_button_css_selector = config['page_locator']['next_button_css_selector']
+
+column_headers_text = config['data_table']['column_headers_text']
 
 current_date = datetime.date.today()
-generated_csv_files_folder = 'generated_csv_files'
-stocks_descriptive_filename = f'{generated_csv_files_folder}/stocks_descriptive_{current_date}.csv'
+generated_csv_files_folder = general_config['generated_csv_files_folder']
+generated_csv_files_sub_folder = config['file']['generated_csv_files_sub_folder']
+stocks_descriptive_filename = f'{generated_csv_files_folder}/{generated_csv_files_sub_folder}/stocks_descriptive_{current_date}.csv'
 
-num_of_records_to_collect = 1000
 num_of_records_collected = 0
-rows_per_page = 20
+num_of_records_to_collect = config['data_table']['num_of_records_to_collect']
+rows_per_page = config['data_table']['rows_per_page']
 
 try:
     # Open the URL
@@ -34,7 +51,7 @@ try:
     driver.maximize_window()
 
      # Wait until 'Stocks' table is visible
-    WebDriverWait(driver, 10).until(
+    WebDriverWait(driver, default_page_wait_time).until(
         expected_conditions.visibility_of_element_located((By.ID, stocks_table_id))
     )
 
@@ -43,7 +60,7 @@ try:
     descriptive_tab.click()
 
      # Wait until 'Country' column is visible
-    WebDriverWait(driver, 10).until(
+    WebDriverWait(driver, default_page_wait_time).until(
         expected_conditions.visibility_of_element_located((By.XPATH, country_column_header_xpath))
     )
 
@@ -73,7 +90,9 @@ try:
         next_button = driver.find_element(By.CSS_SELECTOR, next_button_css_selector)
         next_button.click()
 
-        
+    # Create the directory for csv files to generate if it does not exist
+    os.makedirs(generated_csv_files_folder, exist_ok=True)
+    os.makedirs(f'{generated_csv_files_folder}/{generated_csv_files_sub_folder}', exist_ok=True)
     
     # Create a new csv file with specified column headers and collected data
     with open(stocks_descriptive_filename, mode='w', newline='') as file:
@@ -81,9 +100,6 @@ try:
         writer.writerows(data)
 
     print(f"CSV file '{stocks_descriptive_filename}' generated successfully.")
-
-    
-
 
 finally:
     # Close the browser

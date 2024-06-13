@@ -1,0 +1,20 @@
+network:
+  macrotrends_stock_screener_url: 'https://www.macrotrends.net/stocks/stock-screener'
+
+page_locator:
+  stocks_table_id: 'jqxGrid'
+  descriptive_tab_id: 'columns_descriptive'
+  country_column_header_xpath: "//span[text()='Country']"
+  column_headers_css_selector: "div[role='columnheader']"
+  row_id_prefix: 'row'
+  row_id_suffix: 'jqxGrid'
+  grid_cell_css_selector: 'div[role="gridcell"]'
+  next_button_css_selector: 'div[title="next"]'
+
+data_table:
+  column_headers_text: ["Stock Name", "Ticker", "Market Cap", "Exchange", "Country", "Sector", "Industry"]
+  num_of_records_to_collect: 1000
+  rows_per_page: 20
+
+file:
+  generated_csv_files_sub_folder: 'stocks_descriptive'
