@@ -1,4 +1,4 @@
-import entities.income_statement as IncomeStatement
+import income_statement as IncomeStatement
 
 class Company:
 

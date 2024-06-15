@@ -1,9 +1,7 @@
-import entities.company as Company
-
 class IncomeStatement:
 
-  def __init__(self, company: Company, year) -> None:
-    self.company = company
+  def __init__(self, company_name, year) -> None:
+    self.company_name = company_name
     self.year = year
   
   def set_revenue(self, revenue):

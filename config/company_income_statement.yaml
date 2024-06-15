@@ -1,0 +1,23 @@
+network:
+  company_income_statement_url_prefix: 'https://www.macrotrends.net/stocks/charts'
+  company_income_statement_url_suffix: 'income-statement'
+  num_of_stocks_to_collect_data_from: 1000
+
+page_locator:
+  income_statement_table_id: 'contenttablejqxgrid'
+  descriptive_tab_id: 'columns_descriptive'
+  country_column_header_xpath: "//span[text()='Country']"
+  column_headers_css_selector: "div[role='columnheader']"
+  row_id_prefix: 'row'
+  row_id_suffix: 'jqxGrid'
+  grid_cell_css_selector: 'div[role="gridcell"]'
+  next_button_css_selector: 'div[title="next"]'
+
+data_table:
+  column_headers_text: ["Stock Name", "Ticker", "Market Cap", "Exchange", "Country", "Sector", "Industry"]
+  num_of_records_to_collect: 1000
+  rows_per_page: 20
+
+file:
+  base_stocks_desctiptive_csv_file_path: 'generated_csv_files/stocks_descriptive/stocks_descriptive_2024-06-13.csv'
+  generated_csv_files_sub_folder: 'company_income_statement'
