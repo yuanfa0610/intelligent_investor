@@ -5,18 +5,17 @@ network:
 
 page_locator:
   income_statement_table_id: 'contenttablejqxgrid'
-  descriptive_tab_id: 'columns_descriptive'
-  country_column_header_xpath: "//span[text()='Country']"
-  column_headers_css_selector: "div[role='columnheader']"
-  row_id_prefix: 'row'
-  row_id_suffix: 'jqxGrid'
+  attribute_row_css_selector: 'div[role="row"]'
   grid_cell_css_selector: 'div[role="gridcell"]'
-  next_button_css_selector: 'div[title="next"]'
 
 data_table:
-  column_headers_text: ["Stock Name", "Ticker", "Market Cap", "Exchange", "Country", "Sector", "Industry"]
-  num_of_records_to_collect: 1000
-  rows_per_page: 20
+  attributes: ["Revenue", "Cost Of Goods Sold", "Gross Profit", "Research And Development Expenses", 
+    "SG&A Expenses", "Other Operating Income Or Expenses", "Operating Expenses", "Operating Income", 
+    "Total Non-Operating Income/Expense", "Pre-Tax Income", "Income Taxes", "Income After Taxes", 
+    "Other Income", "Income From Continuous Operations", "Income From Discontinued Operations", "Net Income", 
+    "EBITDA", "EBIT", "Basic Shares Outstanding", "Shares Outstanding", "Basic EPS", "EPS - Earnings Per Share"]
+  years_of_records_to_collect: 5
+
 
 file:
   base_stocks_desctiptive_csv_file_path: 'generated_csv_files/stocks_descriptive/stocks_descriptive_2024-06-13.csv'
