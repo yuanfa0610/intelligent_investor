@@ -37,7 +37,14 @@ attribute_row_css_selector = config['page_locator']['attribute_row_css_selector'
 grid_cell_css_selector = config['page_locator']['grid_cell_css_selector']
 
 income_statement_attributes = config['data_table']['attributes']
+num_of_companies_to_collect_data_from = config['data_table']['num_of_companies_to_collect_data_from']
+latest_year_to_collect = config['data_table']['latest_year_to_collect']
 years_of_records_to_collect = config['data_table']['years_of_records_to_collect']
+
+current_date = datetime.date.today()
+generated_csv_files_folder = general_config['generated_csv_files_folder']
+generated_csv_files_sub_folder = config['file']['generated_csv_files_sub_folder']
+company_income_statements_filename = f'{generated_csv_files_folder}/{generated_csv_files_sub_folder}/income_statements_{current_date}.csv'
 
 try:
 
@@ -53,8 +60,10 @@ try:
 
     # Verify expected number of stocks' info are retrived
     assert len(stocks_info) == num_of_stocks_to_collect_data_from
+
+    companies = []
     
-    for stock_info in stocks_info[0 : 1]:
+    for stock_info in stocks_info[0 : num_of_companies_to_collect_data_from + 1]:
         stock_ticker = stock_info[1]
         company_name_with_dash = stock_info[0].lower().replace(' ', '-')
         company_income_statement_url = f'{company_income_statement_url_prefix}/{stock_ticker}/{company_name_with_dash}/{company_income_statement_url_suffix}'
@@ -80,6 +89,7 @@ try:
 
         income_statements = {}
         attribute_index = 0
+        # Collect data
         for attribute_row in attribute_rows:
             print(f'Collecting {income_statement_attributes[attribute_index]} data ...')
             income_statements[income_statement_attributes[attribute_index]] = []
@@ -99,8 +109,37 @@ try:
             attribute_index += 1
 
         company.income_statements = income_statements
+        companies.append(company)
         print(f'Income statements collected for {company}')
 
+    # Initilize data with column headers
+    column_headers_text = ['Stock Name', 'Ticker'] + income_statement_attributes + ['Year']
+    data = [
+        column_headers_text
+    ]
+
+    # Convert collected data to row-based data
+    rows_data = []
+    for company in companies:
+        for year_index in range(0, years_of_records_to_collect):
+            row_data = [company.name, company.ticker]
+            for income_statement_attribute in income_statement_attributes:
+                row_data.append(company.income_statements[income_statement_attribute][year_index])
+            row_data.append(latest_year_to_collect - year_index)
+            rows_data.append(row_data)
+        
+    data += rows_data
+
+    # Create the directory for csv files to generate if it does not exist
+    os.makedirs(generated_csv_files_folder, exist_ok=True)
+    os.makedirs(f'{generated_csv_files_folder}/{generated_csv_files_sub_folder}', exist_ok=True)
+    
+    # Create a new csv file with specified column headers and collected data
+    with open(company_income_statements_filename, mode='w', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerows(data)
+
+    print(f"CSV file '{company_income_statements_filename}' generated successfully.")
 
 finally:
     # Close the browser
