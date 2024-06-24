@@ -2,3 +2,4 @@ default_page_wait_time: 10
 generated_csv_files_folder: 'generated_csv_files'
 config_file_name:
   stocks_descriptive: 'stocks_descriptive.yaml'
+  company_income_statement: 'company_income_statement.yaml'
