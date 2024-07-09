@@ -14,7 +14,7 @@ data_table:
     "Total Non-Operating Income/Expense", "Pre-Tax Income", "Income Taxes", "Income After Taxes", 
     "Other Income", "Income From Continuous Operations", "Income From Discontinued Operations", "Net Income", 
     "EBITDA", "EBIT", "Basic Shares Outstanding", "Shares Outstanding", "Basic EPS", "EPS - Earnings Per Share"]
-  starting_company_index: 40
+  starting_company_index: 90
   num_of_companies_to_collect_data_from: 10
   latest_year_to_collect: 2023
   years_of_records_to_collect: 10
@@ -22,4 +22,4 @@ data_table:
 file:
   base_stocks_desctiptive_csv_file_path: 'generated_csv_files/stocks_descriptive/stocks_descriptive_2024-06-13.csv'
   generated_csv_files_sub_folder: 'company_income_statements'
-  company_income_statements_filename_suffix: '41-50'
+  company_income_statements_filename_suffix: '91-100'
