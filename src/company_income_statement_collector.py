@@ -65,9 +65,12 @@ try:
     companies = []
     
     for stock_info in stocks_info[starting_company_index : (starting_company_index + num_of_companies_to_collect_data_from)]:
+        print(stock_info)
         stock_ticker = stock_info[1]
         company_name_with_dash = stock_info[0].lower().replace(' ', '-')
         company_income_statement_url = f'{company_income_statement_url_prefix}/{stock_ticker}/{company_name_with_dash}/{company_income_statement_url_suffix}'
+        company_income_statement_url = company_income_statement_url.replace('&', '-')
+        print(company_income_statement_url)
 
         # For each stock, open the URL for income statement of the corresponding company
         driver.get(company_income_statement_url)
