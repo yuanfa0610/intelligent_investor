@@ -1,0 +1,26 @@
+network:
+  company_balance_sheet_url_prefix: 'https://www.macrotrends.net/stocks/charts'
+  company_balance_sheet_url_suffix: 'balance-sheet'
+  num_of_stocks_to_collect_data_from: 1000
+
+page_locator:
+  balance_sheet_table_id: 'contenttablejqxgrid'
+  attribute_row_css_selector: 'div[role="row"]'
+  grid_cell_css_selector: 'div[role="gridcell"]'
+
+data_table:
+  attributes: ["Cash On Hand", "Receivables", "Inventory", "Pre-Paid Expenses", "Other Current Assets",
+    "Total Current Assets", "Property, Plant, And Equipment", "Long-Term Investments", "Goodwill And Intangible Assets",
+    "Other Long-Term Assets", "Total Long-Term Assets", "Total Assets", "Total Current Liabilities",
+    "Long Term Debt", "Other Non-Current Liabilities", "Total Long Term Liabilities", "Total Liabilities",
+    "Common Stock Net", "Retained Earnings (Accumulated Deficit)", "Comprehensive Income", "Other Share Holders Equity",
+    "Share Holder Equity", "Total Liabilities And Share Holders Equity"]
+  starting_company_index: 10
+  num_of_companies_to_collect_data_from: 10
+  latest_year_to_collect: 2023
+  years_of_records_to_collect: 10
+
+file:
+  base_stocks_desctiptive_csv_file_path: 'generated_csv_files/stocks_descriptive/stocks_descriptive_2024-06-13.csv'
+  generated_csv_files_sub_folder: 'company_balance_sheets'
+  company_balance_sheets_filename_suffix: '11-20'

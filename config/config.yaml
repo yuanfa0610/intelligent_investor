@@ -1,5 +1,6 @@
-default_page_wait_time: 10
+default_page_wait_time: 30
 generated_csv_files_folder: 'generated_csv_files'
 config_file_name:
   stocks_descriptive: 'stocks_descriptive.yaml'
   company_income_statement: 'company_income_statement.yaml'
+  company_balance_sheet: 'company_balance_sheet.yaml'
