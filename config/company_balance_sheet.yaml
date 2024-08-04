@@ -15,7 +15,7 @@ data_table:
     "Long Term Debt", "Other Non-Current Liabilities", "Total Long Term Liabilities", "Total Liabilities",
     "Common Stock Net", "Retained Earnings (Accumulated Deficit)", "Comprehensive Income", "Other Share Holders Equity",
     "Share Holder Equity", "Total Liabilities And Share Holders Equity"]
-  starting_company_index: 20
+  starting_company_index: 200
   num_of_companies_to_collect_data_from: 10
   latest_year_to_collect: 2023
   years_of_records_to_collect: 10
@@ -23,4 +23,4 @@ data_table:
 file:
   base_stocks_desctiptive_csv_file_path: 'generated_csv_files/stocks_descriptive/stocks_descriptive_2024-06-13.csv'
   generated_csv_files_sub_folder: 'company_balance_sheets'
-  company_balance_sheets_filename_suffix: '21-30'
+  company_balance_sheets_filename_suffix: '201-210'
