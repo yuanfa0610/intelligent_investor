@@ -14,7 +14,7 @@ data_table:
     "Asset Turnover", "Inventory Turnover Ratio", "Receiveable Turnover", "Days Sales In Receivables",
     "ROE - Return On Equity", "Return On Tangible Equity", "ROA - Return On Assets", "ROI - Return On Investment",
     "Book Value Per Share", "Operating Cash Flow Per Share", "Free Cash Flow Per Share"]
-  starting_company_index: 0
+  starting_company_index: 10
   num_of_companies_to_collect_data_from: 10
   latest_year_to_collect: 2023
   years_of_records_to_collect: 10
@@ -22,4 +22,4 @@ data_table:
 file:
   base_stocks_desctiptive_csv_file_path: 'generated_csv_files/stocks_descriptive/stocks_descriptive_2024-06-13.csv'
   generated_csv_files_sub_folder: 'company_financial_ratios'
-  company_financial_ratios_filename_suffix: '1-10'
+  company_financial_ratios_filename_suffix: '11-20'
