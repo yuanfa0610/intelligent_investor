@@ -4,3 +4,4 @@ config_file_name:
   stocks_descriptive: 'stocks_descriptive.yaml'
   company_income_statement: 'company_income_statement.yaml'
   company_balance_sheet: 'company_balance_sheet.yaml'
+  company_financial_ratios: 'company_financial_ratios.yaml'
