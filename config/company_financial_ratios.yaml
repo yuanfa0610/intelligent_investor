@@ -1,0 +1,25 @@
+network:
+  company_financial_ratios_url_prefix: 'https://www.macrotrends.net/stocks/charts'
+  company_financial_ratios_url_suffix: 'financial-ratios'
+  num_of_stocks_to_collect_data_from: 1000
+
+page_locator:
+  financial_ratios_table_id: 'contenttablejqxgrid'
+  attribute_row_css_selector: 'div[role="row"]'
+  grid_cell_css_selector: 'div[role="gridcell"]'
+
+data_table:
+  attributes: ["Current Ratio", "Long-term Debt / Capital", "Debt/Equity Ratio", "Gross Margin", "Operating Margin",
+    "EBIT Margin", "EBITDA Margin", "Pre-Tax Profit Margin", "Net Profit Margin",
+    "Asset Turnover", "Inventory Turnover Ratio", "Receiveable Turnover", "Days Sales In Receivables",
+    "ROE - Return On Equity", "Return On Tangible Equity", "ROA - Return On Assets", "ROI - Return On Investment",
+    "Book Value Per Share", "Operating Cash Flow Per Share", "Free Cash Flow Per Share"]
+  starting_company_index: 240
+  num_of_companies_to_collect_data_from: 10
+  latest_year_to_collect: 2023
+  years_of_records_to_collect: 10
+
+file:
+  base_stocks_desctiptive_csv_file_path: 'generated_csv_files/stocks_descriptive/stocks_descriptive_2024-06-13.csv'
+  generated_csv_files_sub_folder: 'company_financial_ratios'
+  company_financial_ratios_filename_suffix: '241-250'
